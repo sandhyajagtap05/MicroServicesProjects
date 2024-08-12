@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: ApiGateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: QUIZSERVICE
+          uri: lb://QUIZSERVICE
+          predicates:
+            - Path=/quiz/**
+        - id: QUESTIONSSERVICE
+          uri: lb://QUESTIONSSERVICE
+          predicates:
+            - Path=/Question/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
